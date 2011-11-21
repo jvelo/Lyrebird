@@ -7,7 +7,7 @@
     <version>27</version>
   </parent>
   <groupId>org.xwiki.contrib</groupId>
-  <artifactId>xwiki-skin-bootstrap</artifactId>
+  <artifactId>xwiki-skin-lyrebird</artifactId>
   <name>XWiki Contrib - Skin - Bootstrap</name>
   <version>1.0-SNAPSHOT</version>
   <packaging>xar</packaging>
