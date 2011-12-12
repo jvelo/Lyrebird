@@ -11,14 +11,14 @@
 <customClass></customClass>
 <contentAuthor>XWiki.Admin</contentAuthor>
 <creationDate>1167576476000</creationDate>
-<date>1321903154000</date>
-<contentUpdateDate>1321903154000</contentUpdateDate>
-<version>5.8</version>
+<date>1323719499000</date>
+<contentUpdateDate>1323719499000</contentUpdateDate>
+<version>1.34</version>
 <title></title>
 <template></template>
 <defaultTemplate></defaultTemplate>
 <validationScript></validationScript>
-<comment>Updated class property name</comment>
+<comment></comment>
 <minorEdit>true</minorEdit>
 <syntaxId>xwiki/2.1</syntaxId>
 <hidden>false</hidden><attachment>
@@ -1736,6 +1736,21 @@ cmFwOiBicmVhay13b3JkOw0KDQp9
 <validationRegExp></validationRegExp>
 <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
 </bootstrap.less>
+<contentmenu.vm>
+<customDisplay></customDisplay>
+<disabled>0</disabled>
+<editor>---</editor>
+<name>contentmenu.vm</name>
+<number>21</number>
+<picker>0</picker>
+<prettyName>contentmenu.vm</prettyName>
+<rows>20</rows>
+<size>80</size>
+<unmodifiable>0</unmodifiable>
+<validationMessage></validationMessage>
+<validationRegExp></validationRegExp>
+<classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+</contentmenu.vm>
 <edit.vm>
 <customDisplay></customDisplay>
 <disabled>0</disabled>
@@ -1852,6 +1867,21 @@ cmFwOiBicmVhay13b3JkOw0KDQp9
 <validationRegExp></validationRegExp>
 <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
 </name>
+<shortcuts.vm>
+<customDisplay></customDisplay>
+<disabled>0</disabled>
+<editor>---</editor>
+<name>shortcuts.vm</name>
+<number>22</number>
+<picker>0</picker>
+<prettyName>shortcuts.vm</prettyName>
+<rows>20</rows>
+<size>8</size>
+<unmodifiable>0</unmodifiable>
+<validationMessage></validationMessage>
+<validationRegExp></validationRegExp>
+<classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+</shortcuts.vm>
 <sidebar.vm>
 <customDisplay></customDisplay>
 <disabled>0</disabled>
@@ -4494,10 +4524,30 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
 @import "xwiki.less";</bootstrap.less>
 </property>
 <property>
+<contentmenu.vm>#** 
+ * Voluntary empty !
+ *#</contentmenu.vm>
+</property>
+<property>
 <edit.vm></edit.vm>
 </property>
 <property>
-<endpage.vm>  #set ($version = $xwiki.getSpacePreference('version'))
+<endpage.vm>    #if($lyrebirdLayout == 'fluid')
+      &lt;/div&gt;
+    &lt;/div&gt;
+    #else
+        ## Layout is fixed
+        &lt;/div&gt; ## end content spanX
+        #if($showRightPanels == '1')
+          &lt;div class="span${lyrebirdPanelSpan}"&gt;
+          #template("rightpanels.vm")
+          &lt;/div&gt;
+        #end
+      &lt;/div&gt; ## end row
+    #end
+
+
+  #set ($version = $xwiki.getSpacePreference('version'))
   #if ("$!version" == "")
     #set ($version = $xwiki.getXWikiPreference("version"))
   #end
@@ -4509,8 +4559,6 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
         &lt;footer&gt;
           &lt;p&gt;$!copyright | $!version&lt;/p&gt;
         &lt;/footer&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
 
   &lt;/body&gt;
 &lt;/html&gt;</endpage.vm>
@@ -4563,6 +4611,11 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
 </property>
 <property>
 <name>Default XWiki Skin</name>
+</property>
+<property>
+<shortcuts.vm>#** 
+ * Voluntary empty !
+ *#</shortcuts.vm>
 </property>
 <property>
 <sidebar.vm>        &lt;div class="well"&gt;
@@ -4672,8 +4725,16 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
     &lt;!-- com.xpn.xwiki.plugin.skinx.CssSkinExtensionPlugin --&gt;
     &lt;!-- com.xpn.xwiki.plugin.skinx.CssSkinFileExtensionPlugin --&gt;
 
-    $xwiki.jsfx.use('uicomponents/widgets/list/xlist.js')
-    $xwiki.jsfx.use('uicomponents/suggest/suggest.js')
+$xwiki.jsfx.use('js/scriptaculous/effects.js', true)
+$xwiki.jsfx.use('js/xwiki/widgets/modalPopup.js', true)
+$xwiki.ssfx.use('js/xwiki/widgets/modalPopup.css', true)
+$xwiki.jsfx.use('uicomponents/widgets/confirmationBox.js', true)
+$xwiki.ssfx.use('uicomponents/widgets/confirmationBox.css', true)
+$xwiki.jsfx.use('uicomponents/widgets/confirmedAjaxRequest.js', true)
+$xwiki.jsfx.use('uicomponents/widgets/notification.js', true)
+$xwiki.ssfx.use('uicomponents/widgets/notification.css', true)
+$xwiki.jsfx.use('uicomponents/widgets/list/xlist.js')
+$xwiki.jsfx.use('uicomponents/suggest/suggest.js')
 
     &lt;script type="text/javascript" src="$xwiki.getSkinFile("js/prototype/prototype.js")"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" src="$xwiki.getSkinFile("js/xwiki/xwiki.js", true)"&gt;&lt;/script&gt;
@@ -4713,6 +4774,62 @@ window.docgeturl = "${doc.getURL('get')}";
 // ]]&gt;
     &lt;/script&gt;
 
+#if(($xcontext.action=="inline")||($xcontext.action=="edit") || ($xcontext.action=="admin"))
+$xwiki.get('jsfx').use('uicomponents/widgets/validation/livevalidation_prototype.js')
+$xwiki.get('ssfx').use('uicomponents/widgets/validation/livevalidation.css')
+&lt;script type="text/javascript"&gt;
+// &lt;![CDATA[
+var cancelEditNextOnunload;
+var cancelCancelEditFlag = true;
+var lockEditFlag = false;
+
+function cancelEditResponse() {
+}
+
+function cancelEdit() {
+  if (cancelCancelEditFlag) {
+    var surl = "$doc.getExternalURL('cancel', 'ajax=1')";
+    var myAjax = new Ajax.Request(surl, {
+      method: 'get',
+      parameters: "",
+      asynchronous: true,
+      discardResponse: true
+    });
+    cancelCancelEditFlag = false;
+  }
+  if (cancelEditNextOnunload) {
+    cancelEditNextOnunload();
+  }
+}
+
+function lockEdit() {
+  if (!lockEditFlag) {
+#if ($xcontext.action == 'inline')
+    var surl = "$doc.getExternalURL('lock', "action=inline&amp;ajax=1&amp;${docvariant.replace('&amp;amp;', '&amp;')}")";
+#else
+    var surl = "$doc.getExternalURL('lock', "ajax=1&amp;${docvariant.replace('&amp;amp;', '&amp;')}")";
+#end
+    var myAjax = new Ajax.Request(surl, {
+      method: 'get',
+      parameters: "",
+      asynchronous: true
+    });
+    lockEditFlag = false;
+  }
+}
+
+function prepareCancelEdit() {
+  lockEdit();
+}
+function cancelCancelEdit() {
+  cancelCancelEditFlag = false;
+}
+Event.observe(window, "unload", cancelEdit);
+Event.observe(window, "pagehide", cancelEdit);
+Event.observe(document, "dom:loaded", prepareCancelEdit);
+// ]]&gt;
+&lt;/script&gt;
+#end
 
     ##
     ## Hooks for inserting JavaScript skin extensions
@@ -4733,11 +4850,43 @@ window.docgeturl = "${doc.getURL('get')}";
 
     #template("topbar.vm")
 
+    #set($lyrebirdConfigurationDocument = $xwiki.getDocument('Lyrebird.Configuration'))
+    #set($lyrebirdConfiguration = $lyrebirdConfigurationDocument.getObject('Lyrebird.ConfigurationClass'))
+    #set($lyrebirdLayout = $lyrebirdConfiguration.getProperty('layout').value)
+    #set($lyrebirdPanelSpan = $lyrebirdConfiguration.getProperty('panelSpan').value)
+    #if($lyrebirdPanelSpan &lt; 1 || $lyrebirdPanelSpan &gt; 16)
+      #set($lyrebirdPanelSpan = 3)
+    #end
+    #template("layoutvars.vm")
+
+    #if($lyrebirdLayout == 'fluid' &amp;&amp; $showRightPanels == '1')
+    &lt;div class="alert-message error"&gt;
+      &lt;p&gt;Right panels are not supported with &lt;strong&gt;fluid layout&lt;/strong&gt;. Please fix your configuration to make this message disappear&lt;/p&gt;
+    &lt;/div&gt;
+    #end
+
+    #if($lyrebirdLayout == 'fluid')
     &lt;div class="container-fluid"&gt;
       &lt;div class="sidebar"&gt;
-        #template('sidebar.vm')
+        #template('leftpanels.vm')
       &lt;/div&gt;
-      &lt;div class="content"&gt;
+      &lt;div class="content" id="mainContentArea"&gt;
+    #else
+      ## Layout is fixed
+      &lt;div class="container"&gt;
+        &lt;div class="row"&gt;
+        #set($contentColumnSpan = 16)
+        #if($showLeftPanels == '1')
+          #set($contentColumnSpan = $mathtool.sub($contentColumnSpan, $lyrebirdPanelSpan))
+          &lt;div class="span${lyrebirdPanelSpan}"&gt;
+          #template("leftpanels.vm")
+          &lt;/div&gt;
+        #end
+        #if($showRightPanels == '1')
+          #set($contentColumnSpan = $mathtool.sub($contentColumnSpan, $lyrebirdPanelSpan))
+        #end
+          &lt;div class="span${contentColumnSpan} content"&gt;
+    #end
 
 
 </startpage.vm></property><property><style.css></style.css></property><property><topbar.vm>&lt;div class="topbar"&gt;
@@ -5168,6 +5317,22 @@ ul.xlist li.xitem div.xitemcontainer ul.xlist {
 .container-fluid table td.actions {
   padding: 10px 10px 9px;
   background: inherit;
+}
+
+/* Fix panels */
+
+.xwikipanelcontents p span.panelitem {
+  display:block;
+}
+
+.xwikipanelcontents p span.pitemseparator {
+  display:none;
+}
+
+/* Fix content menu. */
+
+#contentmenu {
+  display:none; /* Just an empty content menu is not enough : the annotation app automatically recreates the menu if it does not exists. */
 }</xwiki.css>
 </property>
 <property>
@@ -5255,6 +5420,17 @@ ul.xwikitabbar {
   &amp;:before {
     content: "←";
   }
+}
+
+/* Panels */
+
+div.panel {
+  .well;
+}
+
+h1.xwikipaneltitle {
+  font-size: 14px;
+  line-height:22px;
 }</xwiki.less>
 </property>
 </object>
