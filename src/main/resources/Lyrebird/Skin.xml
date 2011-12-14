@@ -11,9 +11,9 @@
 <customClass></customClass>
 <contentAuthor>XWiki.Admin</contentAuthor>
 <creationDate>1167576476000</creationDate>
-<date>1323881441000</date>
-<contentUpdateDate>1323881441000</contentUpdateDate>
-<version>3.14</version>
+<date>1323890170000</date>
+<contentUpdateDate>1323890170000</contentUpdateDate>
+<version>3.43</version>
 <title></title>
 <template></template>
 <defaultTemplate></defaultTemplate>
@@ -6318,22 +6318,24 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
   ##   Edit zone  ##
   ##################
   &lt;div id="xwikieditor" class="layoutsection"&gt;
-  &lt;div id="mainEditArea"&gt;
-  #template("hierarchy.vm")
+##  #template("hierarchy.vm")
   #if (($editor == 'wiki' || $editor == 'wysiwyg') &amp;&amp; !$request.section)
   ##  #template('editmeta.vm')
   #end
+  &lt;div&gt; ## -&gt; fullScreenWrapper
+  &lt;div id="mainEditArea" #* class="maximizable" *#&gt;
 
-  &lt;ul class="tabs" data-tabs="tabs"&gt;
-    &lt;li class="active"&gt;&lt;a href="#wysiwyg"&gt;WYSIWYG&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#wiki"&gt;Wiki&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#object"&gt;Objects&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#rights"&gt;Rights&lt;/a&gt;&lt;/li&gt;
+  &lt;ul class="tabs" #* data-tabs="tabs" *#&gt;
+    &lt;li #if("$!request.editor" == 'wysiwyg' || "$!request.editor" == '')class="active"#end&gt;&lt;a href="$doc.getURL('edit', 'editor=wysiwyg')"&gt;WYSIWYG&lt;/a&gt;&lt;/li&gt;
+    &lt;li #if("$!request.editor" == 'wiki')class="active"#end&gt;&lt;a href="$doc.getURL('edit', 'editor=wiki')"&gt;Wiki&lt;/a&gt;&lt;/li&gt;
+    &lt;li #if("$!request.editor" == 'object')class="active"#end&gt;&lt;a href="$doc.getURL('edit', 'editor=object')"&gt;Objects&lt;/a&gt;&lt;/li&gt;
+    &lt;li #if("$!request.editor" == 'rights')class="active"#end&gt;&lt;a href="$doc.getURL('edit', 'editor=rights')"&gt;Rights&lt;/a&gt;&lt;/li&gt;
+##    &lt;li&gt;&lt;a href="#rights"&gt;Rights&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 
-  &lt;div class="pill-content"&gt;
-  #foreach($editor in ["wysiwyg", "wiki", "object", "rights"])
-    &lt;div id="$editor" #if($editor == 'wysiwyg') class="active" #end&gt;
+  &lt;div #* class="pill-content" *#&gt;
+##  #foreach($editor in ["wiki", "object"])
+    &lt;div id="$editor" #if($editor == 'wiki') class="active" #end&gt;
     #if($editor == 'wiki' || $editor == 'wysiwyg')
       &lt;form id="edit" method="post" action="$doc.getURL('preview')" &gt;
       &lt;div class="hidden"&gt;
@@ -6353,8 +6355,8 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
       &lt;/form&gt;
     #end
     &lt;/div&gt;
-  #end
-  &lt;/ul&gt;
+##  #end
+  &lt;/div&gt;
 
   ## This javascript must be placed here since it uses velocity variables set in the template above.
   &lt;script type="text/javascript"&gt;
@@ -6383,6 +6385,7 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
     //]]&gt;
   &lt;/script&gt;
   &lt;/div&gt; ## mainEditArea
+  &lt;/div&gt; ## fullScreenWrapper
 ##  #template("editpanels.vm")
   &lt;/div&gt; ## xwikieditor
   ##
@@ -6590,6 +6593,7 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
 
     &lt;!-- Le styles --&gt;
     ## &lt;link href="$xwiki.getSkinFile('bootstrap.css')" rel="stylesheet"&gt;
+    &lt;link href='http://fonts.googleapis.com/css?family=Didact+Gothic|Quicksand|Josefin+Sans|Droid+Sans|Enriqueta|Baumans|Signika|Spinnaker|Stardos+Stencil' rel='stylesheet' type='text/css'&gt;
     &lt;link rel="stylesheet/less" type="text/css" href="$xwiki.getSkinFile('bootstrap.less', true)"&gt;
     &lt;script src="$xwiki.getSkinFile('less-1.1.5.min.js')" type="text/javascript"&gt;&lt;/script&gt;
 
@@ -6625,7 +6629,7 @@ $xwiki.jsfx.use('uicomponents/suggest/suggest.js')
 document.observe("dom:loaded", function(event){
 
   // Fixs for Bootstrap skin
-  document.fire("xwiki:dom:loaded", event.memo);
+  // document.fire("xwiki:dom:loaded", event.memo);
 
   // Remove livetable styles
   $$('.xwiki-livetable-display-header').invoke("removeClassName", "xwiki-livetable-display-header");
@@ -7312,6 +7316,44 @@ div.main.layoutsubsection {
   position:absolute;
   right:6px;
   top:52px;
+}
+
+/* Edition */
+
+textarea#content {
+  width:100%;
+}
+
+
+.metamodifs,
+#autosaveControl {
+  display:none !important;
+}
+
+#*
+#xwikieditcontent .fullScreenEditButton {
+  display:none;
+}
+
+.fullScreenWrapper #mainEditArea {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.fullScreenWrapper ul.tabs {
+  position:fixed;
+  width:100%
+}
+
+.fullScreenWrapper div.pill-content {
+  margin-top:45px;
+}
+*#
+
+/* footer */
+
+#footerglobal {
+  margin-top:100px;
 }</xwiki.css>
 </property>
 <property>
