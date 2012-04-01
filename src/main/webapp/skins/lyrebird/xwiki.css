@@ -387,6 +387,9 @@ textarea#content {
   color:#303030;
 }
 
+form#edit div.metadata {
+  margin-bottom:15px;
+}
 
 .metamodifs,
 #autosaveControl {
