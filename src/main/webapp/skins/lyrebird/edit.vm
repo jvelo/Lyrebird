@@ -78,7 +78,7 @@
 ##  #foreach($editor in ["wiki", "object"])
     <div id="$editor" #if($editor == 'wiki') class="active" #end>
     #if($editor == 'wiki' || $editor == 'wysiwyg')
-      <form id="edit" method="post" action="$doc.getURL('preview')" >
+      <form id="edit" method="post" action="$doc.getURL('preview')" class="form-horizontal">
       <div class="hidden">
       ## CSRF prevention
       <input type="hidden" name="form_token" value="$!{services.csrf.getToken()}" />
@@ -91,9 +91,14 @@
       <input type="hidden" name="x-maximized" value="$!{escapetool.xml($request.get('x-maximized'))}"/>
       </div>
       <div>
-      Parent  <input type="text" name="parent" value="$!doc.parent" />
-      Title  <input type="text" name="title" value="$!doc.title" />
-      #template("tagedit.vm")
+      <div class="metadata">
+        <div class="pull-right">
+        <label for="parent">Parent</label><input type="text" id="parent" name="parent" value="$!doc.parent" class="span4"/>
+        </div>
+        <label for="title">Title</label><input type="text" id="title" name="title" value="$!doc.title" class="span6" />
+      </div>
+      <div class="clearfix"></div>
+##      #template("tagedit.vm")
     #end
     #template("edit${editor}.vm")
     #if($editor == 'wiki' || $editor == 'wysiwyg')
