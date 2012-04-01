@@ -391,6 +391,10 @@ form#edit div.metadata {
   margin-bottom:15px;
 }
 
+table.xRichTextEditorTabPanel {
+  background-color:transparent;
+}
+
 .metamodifs,
 #autosaveControl {
   display:none !important;
