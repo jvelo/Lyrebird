@@ -1,0 +1,142 @@
+###
+### Main "edit" template
+###
+### General wrapper for edit actions
+###
+##
+## Is the document being edited by another user?
+## If yes, warn about it and show a forcing link:
+##
+#if($tdoc.getLocked() && "$!request.get('force')" == '')
+  #template("startpage.vm")
+  <div class="main layoutsubsection">
+   <div id="mainContentArea">
+    ##
+    $response.setStatus(423)
+    #set($newquerystring = "$!{request.getQueryString().replaceAll('&', '&amp;').replaceAll('&amp;amp;', '&amp;')}"
+                         + '&amp;force=1')
+    #set($forceEditURL = $doc.getURL($xcontext.getAction(), ${newquerystring}))
+    #xwikimessageboxstart($msg.get('notice') "$msg.get('doclockedby') $xwiki.getUserName($doc.getLockingUser())")
+    <a href="$forceEditURL">$msg.get('forcelock')</a>
+    #xwikimessageboxend()
+    ##
+   </div>## mainContentArea
+  </div>## main layoutsubsection
+  #template("endpage.vm")
+#else
+  ##
+  ## Determine what editor to show
+  ##
+  $xwiki.jsfx.use('js/scriptaculous/scriptaculous.js')
+  #if("$!editor" == '')
+    ## Normally no special characters should exist in the editor parameter, so this is just a protection measure.
+    #set($editor = "$!{escapetool.xml($request.getParameter('editor'))}")
+    #if($editor == '')
+      #if(!$services.sheet.getSheets($tdoc, $context.action).isEmpty())
+        #set($editor = 'inline')
+      #elseif(($xwiki.getUserPreference('editor') == 'Wysiwyg') && ($doc.syntax.toIdString() != 'xwiki/1.0' || !$doc.isAdvancedContent()))
+        #set($editor = 'wysiwyg')
+      #else
+        #set($editor = 'wiki')
+      #end
+    #end
+  #end
+  #if($editor == 'inline')
+    ## The inline editor uses the view layout, unlike the rest of the editors.
+    #template('startpage.vm')
+    #template('editinline.vm')
+    #template('endpage.vm')
+  #else
+  ##
+  ## "Compute" the title
+  ##
+  #set($title = $xwiki.parseContent($msg.get('editpageTitle')))
+  ##
+  ## Header
+  ##
+  #template("startpage.vm")
+  ##################
+  ##   Edit zone  ##
+  ##################
+  <div id="xwikieditor" class="layoutsection">
+##  #template("hierarchy.vm")
+  #if (($editor == 'wiki' || $editor == 'wysiwyg') && !$request.section)
+  ##  #template('editmeta.vm')
+  #end
+  <div> ## -> fullScreenWrapper
+  <div id="mainEditArea" #* class="maximizable" *#>
+
+  <ul class="tabs" #* data-tabs="tabs" *#>
+    <li #if("$!request.editor" == 'wysiwyg' || "$!request.editor" == '')class="active"#end><a href="$doc.getURL('edit', 'editor=wysiwyg')">WYSIWYG</a></li>
+    <li #if("$!request.editor" == 'wiki')class="active"#end><a href="$doc.getURL('edit', 'editor=wiki')">Wiki</a></li>
+    <li #if("$!request.editor" == 'object')class="active"#end><a href="$doc.getURL('edit', 'editor=object')">Objects</a></li>
+    <li #if("$!request.editor" == 'rights')class="active"#end><a href="$doc.getURL('edit', 'editor=rights')">Rights</a></li>
+##    <li><a href="#rights">Rights</a></li>
+  </ul>
+
+  <div #* class="pill-content" *#>
+##  #foreach($editor in ["wiki", "object"])
+    <div id="$editor" #if($editor == 'wiki') class="active" #end>
+    #if($editor == 'wiki' || $editor == 'wysiwyg')
+      <form id="edit" method="post" action="$doc.getURL('preview')" >
+      <div class="hidden">
+      ## CSRF prevention
+      <input type="hidden" name="form_token" value="$!{services.csrf.getToken()}" />
+      ## Pass the section number when the form is submitted in order to affect only the specified section.
+      ## We need to test if the section number is present to prevent a NumberFormatException for the empty string.
+      #if("$!{request.section}" != '')
+        <input type="hidden" name="section" value="$!{escapetool.xml($request.section)}" />
+      #end
+      ## This input is used by the full screen widget: it stores the selector of the maximized element, so that the full screen can be restored when coming back from preview.
+      <input type="hidden" name="x-maximized" value="$!{escapetool.xml($request.get('x-maximized'))}"/>
+      </div>
+      <div>
+      Parent  <input type="text" name="parent" value="$!doc.parent" />
+      Title  <input type="text" name="title" value="$!doc.title" />
+      #template("tagedit.vm")
+    #end
+    #template("edit${editor}.vm")
+    #if($editor == 'wiki' || $editor == 'wysiwyg')
+      </form>
+    #end
+    </div>
+##  #end
+  </div>
+
+  ## This javascript must be placed here since it uses velocity variables set in the template above.
+  <script type="text/javascript">
+    //<![CDATA[
+    if ($('tmEditWysiwyg')) {
+      // Manage switch from wiki to wysiwyg, content must be preserved between those editors.
+      Event.observe($('tmEditWysiwyg'), "click", function(event) {
+        #if($doc.syntax.toIdString() == "xwiki/1.0")
+        if (checkAdvancedContent('$msg.get("checkadvancedcontent")') == false) {
+          Event.stop(event);
+          return;
+        }
+        #end
+        document.forms.${formname}.action='$doc.getURL("edit", "editor=wysiwyg&$languageparams")';
+        document.forms.${formname}.submit();
+        Event.stop(event);
+      });
+
+      // Manage switch from wysiwyg to wiki, content must be preserved between those editors.
+      Event.observe($('tmEditWiki'), "click", function(event) {
+        document.forms.${formname}.action='$doc.getURL("edit", "editor=wiki&$languageparams")';
+        document.forms.${formname}.submit();
+        Event.stop(event);
+      });
+    }
+    //]]>
+  </script>
+  </div> ## mainEditArea
+  </div> ## fullScreenWrapper
+##  #template("editpanels.vm")
+  </div> ## xwikieditor
+  ##
+  ## Footer
+  ##
+  #template("footer.vm")
+  #template("htmlfooter.vm")
+  #end ## $editor != 'inline'
+#end

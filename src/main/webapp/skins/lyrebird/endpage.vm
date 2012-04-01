@@ -1,0 +1,30 @@
+    #if($lyrebirdLayout == 'fluid')
+      </div>
+    </div>
+    #else
+        ## Layout is fixed
+        </div> ## end content spanX
+        #if($showRightPanels == '1')
+          <div class="span${lyrebirdPanelSpan}">
+          #template("rightpanels.vm")
+          </div>
+        #end
+      </div> ## end row
+    #end
+
+
+  #set ($version = $xwiki.getSpacePreference('version'))
+  #if ("$!version" == "")
+    #set ($version = $xwiki.getXWikiPreference("version"))
+  #end
+  #if ("$!version" != "")
+    #set ($version = $xwiki.parseContent($version))
+  #else
+    #set ($version = $!xwiki.version)
+  #end
+##        <footer>
+##          <p>$!copyright | $!version</p>
+##        </footer>
+
+  </body>
+</html>

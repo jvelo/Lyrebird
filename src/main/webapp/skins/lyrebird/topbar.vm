@@ -1,0 +1,53 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+     
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+     
+      #set($wikiname = '')
+      #if($xwiki.wikimanager)
+        #set($wikiname = $xwiki.wikimanager.getWikiDocument($xcontext.database).getValue("wikiprettyname"))
+      #end
+      #if("$!wikiname" == '')
+        #set($wikiname = $xcontext.database)
+      #end
+      <a class="brand" href="$xwiki.getURL('Main.WebHome')">$wikiname</a>
+     
+      <!-- Everything you want hidden at 940px or less, place within here -->
+      <div class="nav-collapse">
+      <!-- .nav, .navbar-search, .navbar-form, etc -->
+      <ul class="nav">
+        <li class="active">
+          <a href="#">Home</a>
+        </li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+      <ul class="nav pull-right">
+      #if(!$isGuest)
+        <li>
+ <a>       Logged in as $xwiki.getUserName($xcontext.user, false)</a>
+        </li>
+          #if($hasAdmin)
+          <li>
+          <a href="$xwiki.getURL('XWiki.XWikiPreferences', 'admin')">
+          Administer
+            <i class="icon-cog icon-white"></i>
+          </a>
+          </li>
+          #end
+      #else
+        #set ($loginurl = $xwiki.getURL('XWiki.XWikiLogin', 'login', "xredirect=$escapetool.url($xwiki.getRequestURL())"))
+        <li><a href="$loginurl">Connexion</a></li>
+      #end
+      </ul>
+
+      </div>
+     
+    </div>
+  </div>
+</div>

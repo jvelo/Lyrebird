@@ -1,0 +1,8 @@
+#if($doc.getObject("Journal.Entry"))
+<ul class="tabs">
+<li class="active"><a>Comments ($doc.getObjectNumbers('Main.Comment'))</a></li>
+</ul>
+<div class="pills-content">
+#template("commentsinline.vm")
+</div>
+#end

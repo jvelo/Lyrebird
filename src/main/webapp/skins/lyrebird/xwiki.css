@@ -1,0 +1,436 @@
+#template('colorThemeInit.vm')
+
+ul.tabs {
+  display:none;
+}
+
+.clearfloats {
+  clear: both;
+  height: 1px;
+  margin: -1px 220px 0;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.invisible {
+  visibility: hidden !important;
+}
+
+.loading {
+  background: transparent url("$xwiki.getSkinFile('icons/xwiki/spinner.gif')") no-repeat center;
+}
+
+.separator {
+  color: $theme.textSecondaryColor;
+}
+
+.column {
+  float: left;
+}
+.full {
+  /* Leave a bit of space for borders. */
+  width: 99.8%;
+}
+.half {
+  /* Rounding errors with 50%, might end up with one more pixel which pushes the column down. */
+  width: 49.9%;
+}
+.third {
+  /* Rounding errors with 33.3%, might end up with one more pixel which pushes the column down. */
+  width: 33.2%;
+}
+
+.avatar_30 {
+  max-width: 30px;
+  max-height: 30px;
+}
+* html .avatar_30 {
+  width: 30px;
+}
+.avatar_50 {
+  max-width: 50px;
+  max-height: 50px;
+}
+* html .avatar_50 {
+  width: 50px;
+}
+.avatar_120 {
+  max-width: 120px;
+  max-height: 120px;
+}
+* html .avatar_120 {
+  width: 120px;
+}
+th.avatar {
+  width: 50px;
+}
+
+form div.activityContent {
+  margin-bottom:50px;
+}
+
+#document-title h1 {
+    font-size: 36px;
+}
+
+.edit_section {
+  display: none;
+  height: 24px;
+  line-height: 24px;
+  margin: -19px 0 0;
+  overflow: hidden;
+  position: relative;
+  visibility:hidden;
+}
+
+.edit_section a {
+  background: transparent url("$xwiki.getSkinFile('icons/xwiki/edit-section.png')") no-repeat left top;
+  line-height: 999px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  visibility:visible;
+  width: 20px;
+}
+
+/* @group COMPONENTS*/
+/* --------------XWiki items types list -----------------*/
+ul.xlist {
+  margin: 0 0 0 .5em !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+ul.xlist li.xunderline {
+  border-bottom: solid 1px $theme.borderColor !important;
+}
+
+ul.xlist li.xhighlight:hover {
+  background-color: $theme.highlightColor;
+}
+
+ul.xlist li {
+  float: right;
+  height: 100%;
+  list-style-type: none;
+  padding-top: .2em;
+  width: 100% !important;
+}
+
+ul.xlist li.space, ul.xlist li.page, ul.xlist li.comment, ul.xlist li.attachment {
+  background-position: 2px 3px;
+  background-repeat: no-repeat;
+}
+
+ul.xlist li.space {
+  background-image: url("$xwiki.getSkinFile('icons/silk/folder.gif')");
+}
+
+ul.xlist li.page {
+  background-image: url("$xwiki.getSkinFile('icons/silk/page_white_text.gif')");
+}
+
+ul.xlist li.comment {
+  background-image: url("$xwiki.getSkinFile('icons/silk/comment.gif')");
+}
+
+ul.xlist li.attachment {
+  background-image: url("$xwiki.getSkinFile('icons/silk/attach.gif')");
+  padding-bottom: 0;
+}
+
+ul.xlist li.create a {
+  background: url("$xwiki.getSkinFile('icons/silk/bullet_add.gif')") 7px 3px no-repeat;
+  color: $theme.textSecondaryColor;
+  text-decoration: none;
+  padding-left: 1.5em;
+}
+
+ul.xlist li.xitem div.xitemcontainer {
+  text-indent: 1.5em;
+}
+
+ul.xlist li.xitem div.xitemcontainer ul.xlist {
+  text-indent: 0;
+}
+
+.xspacer {
+  display: none;
+}
+
+/* @group forms */
+
+.xform fieldset {
+  margin: 2em 0;
+}
+.xform fieldset:first-of-type {
+  margin-top: 1em;
+}
+.xform fieldset:last-of-type {
+  margin-bottom: 1em;
+}
+
+.xform input[type="text"], .xform input[type="password"] {
+  width: 99%;
+}
+/* Duplicated because IE6 chokes on the first two selectors. Don't recombine! */
+.xform select, .xform textarea {
+  width: 99%;
+}
+
+.xform .xRequired {
+    color: #888888;
+    font-size: 0.9em;
+    font-style: italic;
+    font-weight: normal;
+    margin-left: 1ex;
+    text-transform: none;
+}
+
+.xform .xErrorMsg {
+    color: #CC3333;
+    display: block;
+    font-size: 0.8em;
+    font-weight: normal;
+    margin-bottom: 0.3em;
+}
+
+/* @group VERTICAL MENU */
+/* General styling */
+.vertical-menu {
+  border: 1px solid $theme.borderColor;
+  border-top-width: 0;
+  float: left;
+  font-size: .857em;/* 14px -> 12px */
+  margin: 0 2em 2em 0;
+  width: 15em;
+}
+
+.vertical-menu ul {
+  list-style-type: none;
+  margin: 0;
+}
+.vertical-menu ul ul ul {
+  margin-left: 2em;
+}
+
+.vertical-menu li {
+  border-top: 1px solid $theme.borderColor;
+  position: relative;
+}
+
+.vertical-menu span {
+  background: none no-repeat scroll 7px transparent;
+  display: block;
+}
+
+.vertical-menu a {
+  display: block;
+  padding: .5em .5em .5em 30px;
+  text-decoration: none;
+  word-wrap: break-word;
+}
+
+/* Section titles */
+.vertical-menu .group {
+  background-color: $theme.panelCollapsedBackgroundColor;
+  font-weight: 700;
+  font-variant: small-caps;
+}
+.vertical-menu .group * {
+  color: $theme.panelCollapsedTextColor;
+}
+
+/* Highlight items when hovering */
+.vertical-menu span:hover {
+  background-color: $theme.highlightColor;
+}
+.vertical-menu .group:hover {
+  background-color: $theme.panelHeaderBackgroundColor;
+}
+.vertical-menu .group:hover * {
+  color: $theme.panelHeaderTextColor;
+}
+
+/* Selected item */
+.vertical-menu .current {
+  background-color: $theme.highlightColor;
+  font-weight: bold;
+}
+.vertical-menu .current-group {
+  background-color: $theme.panelHeaderBackgroundColor;
+  color: $theme.panelHeaderTextColor;
+}
+.vertical-menu .current-group *, .vertical-menu .current-group *:visited, .vertical-menu .current-group *:active {
+  color: $theme.panelHeaderTextColor;
+}
+
+/* Draw an arrow pointing right for the selected item */
+.vertical-menu .current:after, .vertical-menu .current a:after {
+  border-left: 10px solid $theme.highlightColor;
+  border-top: 1.2em solid transparent;
+  border-bottom: 1.2em solid transparent;
+  content: "";
+  display: block;
+  position: absolute;
+  right: -10px;
+  top: 0%;
+}
+.vertical-menu .current a:after {
+  border-left-color: $theme.borderColor;
+  right: -11px;
+}
+.vertical-menu .current-group:after {
+  border-left-color: $theme.panelHeaderBackgroundColor !important;
+}
+
+/* Livetable */
+.container-fluid .xwiki-livetable-pagination .xwiki-livetable-pagesize,
+.container-fluid .xwiki-livetable-pagination .xwiki-livetable-limits  {
+  line-height:30px;
+}
+
+.container-fluid .xwiki-livetable-pagination .xwiki-livetable-pagination-text {
+  display:none;
+}
+
+.container-fluid .controlPagination {
+  width:200px;
+  height:36px;
+  line-height: 34px;
+  padding: 0 14px;
+}
+
+.container-fluid .controlPagination a {
+  position:relative;
+  float:left;
+}
+
+.container-fluid .controlPagination a.prevPagination,
+.container-fluid .controlPagination a.noPrevPagination,
+.container-fluid .controlPagination a.nextPagination,
+.container-fluid .controlPagination a.noNextPagination {
+    background-image: none;
+    height: auto;
+    width: auto;
+    padding-top: 5px;
+}
+
+.container-fluid a.noPrevPagination,
+.container-fluid a.prevPagination{
+    margin-left: 20px;
+}
+
+.container-fluid .pagination {
+  margin:0;
+}
+
+.container-fluid a.prevPagination span,
+.container-fluid a.nextPagination span,
+.container-fluid a.noPrevPagination span,
+.container-fluid a.noNextPagination span {
+  display:block !important;
+}
+
+.container-fluid a.noPrevPagination,
+.container-fluid a.noNextPagination {
+  color: #BFBFBF;
+  cursor:normal;
+}
+
+.container-fluid a.noPrevPagination:hover,
+.container-fluid a.noNextPagination:hover {
+  text-decoration:none;
+}
+
+.container-fluid table td.actions {
+  padding: 10px 10px 9px;
+  background: inherit;
+}
+
+/* Fix panels */
+
+.xwikipanelcontents p span.panelitem {
+  display:block;
+}
+
+.xwikipanelcontents p span.pitemseparator {
+  display:none;
+}
+
+/* Fix content menu. */
+
+#contentmenu .rightmenu {
+  display:none; /* Just an empty content menu is not enough : the annotation app automatically recreates the menu if it does not exists. */
+}
+
+div.main.layoutsubsection {
+  position:relative;
+}
+
+#contentmenu {
+  position:absolute;
+  right:6px;
+  top:52px;
+}
+
+/* Edition */
+
+textarea#content {
+  width:100%;
+  color:#303030;
+}
+
+
+.metamodifs,
+#autosaveControl {
+  display:none !important;
+}
+
+#*
+#xwikieditcontent .fullScreenEditButton {
+  display:none;
+}
+
+.fullScreenWrapper #mainEditArea {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.fullScreenWrapper ul.tabs {
+  position:fixed;
+  width:100%
+}
+
+.fullScreenWrapper div.pill-content {
+  margin-top:45px;
+}
+*#
+
+/* data editors */
+
+.xproperty-title h2, .xobject-title h3 {
+  line-height: inherit !important;
+  font-weight: normal !important;
+}
+
+#xwikiobjects .label {
+  background-color:inherit !important;
+}
+
+#body #xwikiobjects label, #body #xwikiclassproperties label {
+  float:none;
+  background-color: inherit !important;
+  line-height: inherit !important;
+}
+/* footer */
+
+#footerglobal {
+  margin-top:100px;
+}

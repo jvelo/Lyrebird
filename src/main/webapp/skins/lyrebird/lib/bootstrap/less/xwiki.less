@@ -1,0 +1,134 @@
+// Adapt XWiki styles to bootstrap styles
+
+/**
+ * Adapt forms
+ */
+
+form.xform {
+  // .form-vertical;
+}
+
+.xHint {
+  .help-block;
+  font-weight:normal;
+}
+
+.buttons {
+  .form-actions;
+}
+
+.button {
+  .btn-primary;
+}
+
+.button.secondary {
+  .btn;
+}
+
+.xform .buttons {
+  .form-actions;
+  width: 100%;
+}
+
+.xform dl dd {
+  margin-left:0;
+}
+
+/* Boxes */
+
+.box {
+   .alert;
+
+   &.infomessage {
+     .alert-info;
+   }
+
+   &.warningmessage {
+//     .alert-message.warning;
+   }
+
+   &.errormessage {
+     .alert-error;
+   }
+}
+
+/* Tabs */
+
+ul.xwikitabbar {
+  .nav-tabs;
+}
+
+/* Livetable */
+
+.pagesizeselect {
+}
+
+.pagination, .controlPagination{
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    float: left;
+    margin: 0;
+}
+
+.nextPagination span {
+
+  &:after {
+    content: "→";
+  }
+}
+
+.prevPagination span {
+  &:before {
+    content: "←";
+  }
+}
+
+/* Panels */
+
+div.panel {
+  .well;
+//  background-color : @panelBackgroundColor;
+}
+
+h1.xwikipaneltitle {
+  font-size: 14px;
+  line-height:22px;
+}
+
+/* Color theme */
+
+body {
+//  background-color: @pageBackgroundColor;
+}
+
+/* Top title */
+
+#document-title {
+  .page-header;
+  margin-bottom: 8px;
+}
+
+/* Footer */
+
+footer, footer a {
+  color:lightGrey;
+}
+
+/* XWiki notices */
+
+fieldset.xwikimessage {
+  .alert;
+  .alert-block;
+  position:relative;
+  padding-top:40px;
+}
+
+fieldset.xwikimessage legend {
+  .alert-heading;
+  position:absolute;
+  top:10px;
+  border:0;
+  font-size:16px;
+  font-weight:bold;
+}

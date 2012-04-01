@@ -1,0 +1,2 @@
+$tdoc.getRenderedContent("{{include document='Main.Comment' /}}", "xwiki/2.0")
+
