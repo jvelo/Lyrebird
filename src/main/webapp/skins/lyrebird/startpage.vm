@@ -222,7 +222,7 @@ Event.observe(document, "dom:loaded", prepareCancelEdit);
     </div>
     #end
 
-    #set($contentColumnSpan = 16) ## get from config
+    #set($contentColumnSpan = 12) ## get from config
     #if($lyrebirdLayout == 'fluid')
     <div class="container-fluid">
       <div class="sidebar">
