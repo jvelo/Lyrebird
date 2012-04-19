@@ -15,22 +15,50 @@
       #if("$!wikiname" == '')
         #set($wikiname = $xcontext.database)
       #end
-      <a class="brand" href="$xwiki.getURL('Main.WebHome')">$wikiname</a>
-     
-      <!-- Everything you want hidden at 940px or less, place within here -->
+      <a class="brand" href="${xwiki.getURL('Main.WebHome')}">$wikiname</a>
+
+      ## FIXME Construct this map from a small app in Lyrebird space.
+      #set($links = {
+       "Technology" : "Technology.WebHome",
+       "Business" : {
+         "Pricing" : "Business.Pricing",
+         "Customers" : "Business.Customers"
+       },
+       "Sandbox" : "Sandbox.WebHome"
+      })
+
       <div class="nav-collapse">
-      <!-- .nav, .navbar-search, .navbar-form, etc -->
-      <ul class="nav">
-        <li class="active">
-          <a href="#">Home</a>
-        </li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
+        <ul class="nav">
+        #foreach($link in $links.keySet())
+          #if($links.get($link).class.name == "java.lang.String")
+            <li #if($doc.fullName == $links.get($link))class="active"#end><a href="${xwiki.getURL($links.get($link))}">$link</a></li>
+          #else
+            ## Dropdown with sublinks
+            <li class="dropdown">
+              <a href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown">
+                $link
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                #foreach($sublink in $links.get($link).keySet())
+                <li #if($doc.fullName == $links.get($link).get($sublink))class="active"#end><a href="${xwiki.getURL($links.get($link).get($sublink))}">$sublink</a></li>
+                #end 
+              </ul>
+            </li>
+          #end
+        #end
       </ul>
       <ul class="nav pull-right">
       #if(!$isGuest)
-        <li>
- <a>       Logged in as $xwiki.getUserName($xcontext.user, false)</a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">$xwiki.getUserName($xcontext.user, false)<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="${xwiki.getURL($context.user)}">My Profile</a></li>
+            <li><a href="${xwiki.getURL($context.user, 'view', 'category=preferences')}">Preferences</a></li>
+            <li><a href="${xwiki.getURL($doc.fullName, 'logout')}">Logout</a></li>
+          </ul>
         </li>
           #if($hasAdmin)
           <li>
@@ -42,7 +70,7 @@
           #end
       #else
         #set ($loginurl = $xwiki.getURL('XWiki.XWikiLogin', 'login', "xredirect=$escapetool.url($xwiki.getRequestURL())"))
-        <li><a href="$loginurl">Connexion</a></li>
+        <li><a href="${loginurl}">Connexion</a></li>
       #end
       </ul>
 

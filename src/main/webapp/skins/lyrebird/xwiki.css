@@ -20,7 +20,7 @@ ul.tabs {
 }
 
 .loading {
-  background: transparent url("$xwiki.getSkinFile('icons/xwiki/spinner.gif')") no-repeat center;
+  background: transparent url($xwiki.getSkinFile('icons/xwiki/spinner.gif')) no-repeat center;
 }
 
 .separator {
@@ -87,7 +87,7 @@ form div.activityContent {
 }
 
 .edit_section a {
-  background: transparent url("$xwiki.getSkinFile('icons/xwiki/edit-section.png')") no-repeat left top;
+  background: transparent url($xwiki.getSkinFile('icons/xwiki/edit-section.png')) no-repeat left top;
   line-height: 999px;
   margin: 0;
   overflow: hidden;
@@ -385,6 +385,15 @@ div.main.layoutsubsection {
 textarea#content {
   width:100%;
   color:#303030;
+}
+
+.metadata input#title {
+  font-size: 32px;
+  height: 36px;
+}
+
+.metadata .help-block {
+  font-size: 11px;
 }
 
 form#edit div.metadata {

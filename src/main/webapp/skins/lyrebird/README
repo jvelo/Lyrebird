@@ -1,0 +1,7 @@
+# In order to build :
+# - install the lessc LESS compiler
+# - then run :
+lessc lib/bootstrap/less/bootstrap.less > bootstrap-xwiki.css
+
+# With minification ?
+lessc --compress lib/bootstrap/less/bootstrap.less > bootstrap-xwiki.min.css
