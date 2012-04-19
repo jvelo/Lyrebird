@@ -17,15 +17,7 @@
       #end
       <a class="brand" href="${xwiki.getURL('Main.WebHome')}">$wikiname</a>
 
-      ## FIXME Construct this map from a small app in Lyrebird space.
-      #set($links = {
-       "Technology" : "Technology.WebHome",
-       "Business" : {
-         "Pricing" : "Business.Pricing",
-         "Customers" : "Business.Customers"
-       },
-       "Sandbox" : "Sandbox.WebHome"
-      })
+      #template("toplinks.vm")
 
       <div class="nav-collapse">
         <ul class="nav">

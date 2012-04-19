@@ -1,0 +1,9 @@
+## FIXME Construct this map from a small app in Lyrebird space.
+#set($links = {
+ "Technology" : "Technology.WebHome",
+ "Business" : {
+   "Pricing" : "Business.Pricing",
+   "Customers" : "Business.Customers"
+ },
+ "Sandbox" : "Sandbox.WebHome"
+})
