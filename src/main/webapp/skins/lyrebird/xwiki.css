@@ -409,6 +409,10 @@ table.xRichTextEditorTabPanel {
   display:none !important;
 }
 
+.edit-meta-tools {
+  display:none !important;
+}
+
 #*
 #xwikieditcontent .fullScreenEditButton {
   display:none;
