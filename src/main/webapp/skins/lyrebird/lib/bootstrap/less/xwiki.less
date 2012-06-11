@@ -17,6 +17,13 @@ form.xform {
   .form-actions;
 }
 
+.bottombuttons .button {
+  /* Fix button styles when smartclient skin_styles.css is included
+     (as soon as there is a WYSIWYG editor). */
+  .btn;
+  .btn-primary;
+}
+
 /* Fix some strange behavior in the template provider admin section */
 .xform .buttons:before, .xform .buttons:after {
   display: inline-block !important;

@@ -100,7 +100,7 @@
           #set($currentParentDocument = $xwiki.getDocument($doc.parent))
         #end
         #if($currentParentDocument && $currentParentDocument.space != $doc.space)
-        <input type="text" id="parent" name="parent" value="$!doc.parent" class="span4" value="${currentParentDocument.fullName}"/>
+        <input type="text" id="parent" name="parent" value="$!doc.parent" class="span3" value="${currentParentDocument.fullName}"/>
         #else
         <select id="parent" name="parent" class="span4">
           <option value="${doc.space}.WebHome">$xwiki.getDocument("${doc.space}.WebHome").displayTitle</option>
@@ -115,7 +115,7 @@
         #end
         </div>
         #end
-        <label for="title">Title</label><input type="text" id="title" name="title" value="$!doc.title" class="span6" />
+        <label for="title">Title</label><input type="text" id="title" name="title" value="$escapetool.xml($!doc.title)" class="span6" />
         <p class="help-block">permalink is <tt>$doc.getURL('view')</tt> - <a href="$doc.getURL('view', 'xpage=rename')">change</a></p>
       </div>
       <div class="clearfix"></div>
