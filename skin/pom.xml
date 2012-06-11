@@ -7,8 +7,8 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>org.xwiki.contrib</groupId>
-  <artifactId>xwiki-skin-lyrebird-xar</artifactId>
-  <name>XWiki Contrib - Skin - Lyrebird - XAR</name>
+  <artifactId>xwiki-skin-lyrebird-skin</artifactId>
+  <name>XWiki Contrib - Skin - Lyrebird - Skin</name>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <build>

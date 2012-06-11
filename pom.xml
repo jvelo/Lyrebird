@@ -14,5 +14,6 @@
   <description>An XWiki skin based on Twitter's bootstrap.css</description>
   <modules>
     <module>xar</module>
+    <module>skin</module>
   </modules>
 </project>
