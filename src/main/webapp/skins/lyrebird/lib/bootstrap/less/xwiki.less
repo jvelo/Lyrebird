@@ -13,8 +13,13 @@ form.xform {
   font-weight:normal;
 }
 
-.buttons {
+.buttons, .bottombuttons {
   .form-actions;
+}
+
+/* Fix some strange behavior in the template provider admin section */
+.xform .buttons:before, .xform .buttons:after {
+  display: inline-block !important;
 }
 
 .button {
@@ -131,4 +136,26 @@ fieldset.xwikimessage legend {
   border:0;
   font-size:16px;
   font-weight:bold;
+}
+
+/* Reset dt.label (used in XWiki for class property lists - for example in data editors, in the user profile, etc.)
+   to not apply bootstrap.css "inline label" styles, as in http://twitter.github.com/bootstrap/components.html#labels */
+dt.label {
+  /* Reset */
+  color: inherit;
+  background: none;
+  text-shadow: none;
+}
+
+dt.label label {
+  /* Copy over h6 styles */
+  font-size: 11px;
+  color: #333;
+  text-transform: uppercase;
+  line-height: 18px;
+  margin: 0;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility;
 }

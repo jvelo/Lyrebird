@@ -857,3 +857,5 @@ h1.xwikipaneltitle{font-size:14px;line-height:22px;}
 footer,footer a{color:lightGrey;}
 fieldset.xwikimessage{padding:8px 35px 8px 14px;margin-bottom:18px;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background-color:#fcf8e3;border:1px solid #fbeed5;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;color:#c09853;padding-top:14px;padding-bottom:14px;position:relative;padding-top:40px;}
 fieldset.xwikimessage legend{color:inherit;position:absolute;top:10px;border:0;font-size:16px;font-weight:bold;}
+dt.label{color:inherit;background:none;text-shadow:none;}
+dt.label label{font-size:11px;color:#333;text-transform:uppercase;line-height:18px;margin:0;font-family:inherit;font-weight:bold;color:inherit;text-rendering:optimizelegibility;}
