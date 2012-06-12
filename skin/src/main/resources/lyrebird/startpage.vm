@@ -108,10 +108,14 @@ $xwiki.jsfx.use('lib/bootstrap/js/bootstrap-dropdown.js')
     <script type="text/javascript">
 // <![CDATA[
 document.observe("dom:loaded", function(event){
+
+  // Fixs for Bootstrap skin
+  document.fire("xwiki:dom:loaded", event.memo);
+
   // Remove livetable styles
   $$('.xwiki-livetable-display-header').invoke("removeClassName", "xwiki-livetable-display-header");
   $$('.xwiki-livetable-display-body').invoke("removeClassName", "xwiki-livetable-display-body");
-  $$('.xwiki-livetable-display').invoke("addClassName", "condensed-table zebra-striped");
+  $$('.xwiki-livetable-display').invoke("addClassName", "table table-striped table-condensed");
 });
 
 XWiki.webapppath = "${xwiki.webAppPath}";
@@ -211,7 +215,7 @@ Event.observe(document, "dom:loaded", prepareCancelEdit);
     #template("headExtra.vm")
   </head>
 
-  <body id="body">
+  <body id="body" class="lyrebird">
 
     #template("topbar.vm")
 
