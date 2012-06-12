@@ -1,5 +1,3 @@
 #if($hasEdit)
-<a href="$doc.getURL('edit')">
-  <img src="$xwiki.zipexplorer.getFileLink($xwiki.getDocument('Lyrebird.Icons'), 'iconic.zip', 'raster/black/pen_24x24.png')" title="Edit this page" />
-</a>
+<a class="edit" href="$doc.getURL('edit')"></a>
 #end

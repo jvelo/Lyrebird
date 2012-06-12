@@ -370,6 +370,17 @@ ul.xlist li.xitem div.xitemcontainer ul.xlist {
   display:none; /* Just an empty content menu is not enough : the annotation app automatically recreates the menu if it does not exists. */
 }
 
+#contentmenu a.edit:after {
+  content: "\270E";
+  font-size: 40px;
+  position: relative;
+  top: 15px;
+}
+
+#contentmenu a.edit:hover {
+  text-decoration: none;
+}
+
 div.main.layoutsubsection {
   position:relative;
 }
