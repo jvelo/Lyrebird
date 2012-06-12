@@ -68,58 +68,77 @@ form.xform {
 /* Tabs */
 
 ul.xwikitabbar {
-  .nav-tabs;
+  .xwikitabbar;
 }
 
 /* Livetable */
 
-  .pagesizeselect {
+.pagesizeselect {
+}
+
+.xwiki-livetable-limits {
+  float:none !important;
+}
+
+select.pagesizeselect {
+  width: 60px;
+  padding-left: 5px;
+}
+
+.xwiki-livetable-pagination-text {
+  display: none !important;
+}
+
+.pagination, .controlPagination {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  float: left;
+  margin: 0;
+  line-height: 34px;
+  height: 34px !important;
+}
+
+.controlPagination {
+  width:48px !important;
+}
+
+.xwiki-livetable td.xwiki-livetable-pagination {
+  padding-top: 20px;
+}
+
+.xwiki-livetable {
+  margin-bottom:50px !important;
+}
+
+body.lyrebird {
+
+  .xwiki-livetable td.xwiki-livetable-display-container {
+    padding: 20px 0 0 0;
   }
 
-  .xwiki-livetable-limits {
-    float:none !important;
-  }
+  .controlPagination a.prevPagination,
+  .controlPagination a.nextPagination {
+    background-image:none;
+    width:auto;
+    padding-top: 5px;
+    width: 58px !important;
 
-  select.pagesizeselect {
-    width: 60px;
-    padding-left: 5px;
-  }
-
-  .xwiki-livetable-pagination-text {
-    display: none !important;
-  }
-
-  .pagination, .controlPagination{
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      border-radius: 3px 3px 3px 3px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-      float: left;
-      margin: 0;
-      line-height: 34px;
-      height: 34px !important;
-  }
-
-  body.lyrebird {
-
-    .xwiki-livetable td.xwiki-livetable-display-container {
-      padding: 20px 0 0 0;
+    &:after {
+      font-size: 2rem;
+      left: -2px;
+      position: relative;
     }
-
-    .controlPagination a.prevPagination,
-    .controlPagination a.nextPagination {
-      background-image:none;
-      width:auto;
-      padding-top: 5px;
-      width: 58px !important;
-
-      &:after, &:before {
-        content: "→";
-        font-size: 2rem;
-        left: -7px;
-        position: relative;
-      }
-    }
   }
+}
+
+.controlPagination a.prevPagination:after {
+  content: "←";
+}
+
+.controlPagination a.nextPagination:after {
+  content: "→";
+}
 
 /* Panels */
 
@@ -190,4 +209,54 @@ dt.label label {
   font-weight: bold;
   color: inherit;
   text-rendering: optimizelegibility;
+}
+
+/* XE Navigation (document index, tree, etc.) tabs
+   Copy over most nav-tabs styles as there is no way to inject styles that
+   are not grouped under a mixin class name (ex: ul.bla > li)*/
+
+ul.xwikitabbar {
+  .nav-tabs;
+  .nav;
+}
+
+ul.xwikitabbar > li {
+  float: left;
+}
+.xwikitabbar > li > a {
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: 2px;
+  line-height: 14px; // keeps the overall height an even number
+}
+
+// Give the tabs something to sit on
+.xwikitabbar {
+  border-bottom: 1px solid #ddd;
+}
+
+// Make the list-items overlay the bottom border
+.xwikitabbar > li {
+  margin-bottom: -1px;
+}
+
+// Actual tabs (as links)
+.xwikitabbar > li > a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 34px;
+  border: 1px solid transparent;
+  .border-radius(4px 4px 0 0);
+  &:hover {
+    border-color: @grayLighter @grayLighter #ddd;
+  }
+}
+// Active state, and it's :hover to override normal :hover
+.xwikitabbar > .active > a,
+.xwikitabbar > .active > a:hover {
+  color: @gray;
+  background-color: @white;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+  cursor: default;
 }
