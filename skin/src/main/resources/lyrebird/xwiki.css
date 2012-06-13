@@ -68,6 +68,16 @@ th.avatar {
   width: 50px;
 }
 
+/**
+ * Fix places where the "default avatar" image height is hardcoded in the DOM instead
+ * of being set in CSS (For example in livetable user columns).
+ * This ultimately should be fixed right in XWiki/XE.
+ */
+img[height][src*="noavatar.png"] {
+  height: 40px;
+}
+
+
 form div.activityContent {
   margin-bottom:50px;
 }
