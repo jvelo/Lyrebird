@@ -22,10 +22,13 @@
       <div class="nav-collapse">
         <ul class="nav">
         #foreach($link in $links.keySet())
-          #if($links.get($link).class.name == "java.lang.String")
+          ## calling Class#getName generates velocity warnings, so here we compare the link's java.lang.Class
+          ## directly with the Class of a string, which we obtain against the document's name for conveniance.
+          #if($links.get($link).class == $doc.name.class)
+            ## If the link is just a string, we display it such
             <li #if($doc.fullName == $links.get($link))class="active"#end><a href="${xwiki.getURL($links.get($link))}">$link</a></li>
           #else
-            ## Dropdown with sublinks
+            ## Otherwise it's a collection of links and we display it as a dropdown
             <li class="dropdown">
               <a href="#"
                 class="dropdown-toggle"
