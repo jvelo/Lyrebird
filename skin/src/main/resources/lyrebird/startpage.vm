@@ -82,7 +82,6 @@
     <!-- com.xpn.xwiki.plugin.skinx.CssSkinExtensionPlugin -->
     <!-- com.xpn.xwiki.plugin.skinx.CssSkinFileExtensionPlugin -->
 
-
 $xwiki.jsfx.use('js/scriptaculous/effects.js', true)
 $xwiki.jsfx.use('js/xwiki/widgets/modalPopup.js', true)
 $xwiki.ssfx.use('js/xwiki/widgets/modalPopup.css', true)
@@ -211,8 +210,6 @@ Event.observe(document, "dom:loaded", prepareCancelEdit);
     <link rel="apple-touch-icon" href="$xwiki.getSkinFile('apple-touch-icon.png')">
     <link rel="apple-touch-icon" sizes="72x72" href="$xwiki.getSkinFile('apple-touch-icon-72x72.png')">
     <link rel="apple-touch-icon" sizes="114x114" href="$xwiki.getSkinFile('apple-touch-icon-114x114.png')">
-
-    #template("headExtra.vm")
   </head>
 
   <body id="body" class="lyrebird">
@@ -237,10 +234,12 @@ Event.observe(document, "dom:loaded", prepareCancelEdit);
     #set($contentColumnSpan = 12) ## get from config
     #if($lyrebirdLayout == 'fluid')
     <div class="container-fluid">
-      <div class="sidebar">
-        #template('leftpanels.vm')
-      </div>
-      <div class="content" id="mainContentArea">
+      <div class="row-fluid">
+        <div class="span${lyrebirdPanelSpan} sidebar">
+          #template('leftpanels.vm')
+        </div>
+        #set($contentColumnSpan = $mathtool.sub($contentColumnSpan, $lyrebirdPanelSpan))
+        <div class="content span${contentColumnSpan}" id="mainContentArea">
     #else
       ## Layout is fixed
       <div class="container">
