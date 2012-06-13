@@ -1,9 +1,5 @@
 #template('colorThemeInit.vm')
 
-ul.tabs {
-  display:none;
-}
-
 .clearfloats {
   clear: both;
   height: 1px;

@@ -66,13 +66,26 @@
   <div> ## -> fullScreenWrapper
   <div id="mainEditArea" #* class="maximizable" *#>
 
-  <ul class="tabs" #* data-tabs="tabs" *#>
-    <li #if("$!request.editor" == 'wysiwyg' || "$!request.editor" == '')class="active"#end><a href="$doc.getURL('edit', 'editor=wysiwyg')">WYSIWYG</a></li>
-    <li #if("$!request.editor" == 'wiki')class="active"#end><a href="$doc.getURL('edit', 'editor=wiki')">Wiki</a></li>
-    <li #if("$!request.editor" == 'object')class="active"#end><a href="$doc.getURL('edit', 'editor=object')">Objects</a></li>
-    <li #if("$!request.editor" == 'rights')class="active"#end><a href="$doc.getURL('edit', 'editor=rights')">Rights</a></li>
-##    <li><a href="#rights">Rights</a></li>
-  </ul>
+  #if($isAdvancedUser)
+  <div class="pull-right">
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        Editor
+        <span class="caret"></span>
+      </a>
+
+      <ul class="dropdown-menu">
+        <li #if("$!request.editor" == 'wysiwyg' || "$!request.editor" == '')class="active"#end><a href="$doc.getURL('edit', 'editor=wysiwyg')">WYSIWYG</a></li>
+        <li #if("$!request.editor" == 'wiki')class="active"#end><a href="$doc.getURL('edit', 'editor=wiki')">Wiki</a></li>
+        <li #if("$!request.editor" == 'object')class="active"#end><a href="$doc.getURL('edit', 'editor=object')">Objects</a></li>
+        <li #if("$!request.editor" == 'class')class="active"#end><a href="$doc.getURL('edit', 'editor=class')">Class</a></li>
+        <li #if("$!request.editor" == 'rights')class="active"#end><a href="$doc.getURL('edit', 'editor=rights')">Rights</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  #end
+
 
   <div #* class="pill-content" *#>
 ##  #foreach($editor in ["wiki", "object"])
