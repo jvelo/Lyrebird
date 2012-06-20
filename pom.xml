@@ -12,6 +12,18 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <description>An XWiki skin based on Twitter's bootstrap.css</description>
+  <scm>
+    <connection>scm:git:git://github.com/jvelo/Lyrebird.git</connection>
+    <developerConnection>scm:git:git@github.com:jvelo/Lyrebrid.git</developerConnection>
+    <url>https://github.com/jvelo/Lyrebird</url>
+  </scm>
+  <distributionManagement>
+    <repository>
+      <id>xwiki-staging</id>
+      <name>XWiki Staging Repository</name>
+      <url>http://nexus.xwiki.org/nexus/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
   <modules>
     <module>xar</module>
     <module>skin</module>
