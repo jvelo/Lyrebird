@@ -4,12 +4,12 @@
   <parent>
     <groupId>org.xwiki.contrib</groupId>
     <artifactId>xwiki-skin-lyrebird</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.9</version>
   </parent>
   <groupId>org.xwiki.contrib</groupId>
   <artifactId>xwiki-skin-lyrebird-skin</artifactId>
   <name>XWiki Contrib - Skin - Lyrebird - Skin</name>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.9</version>
   <packaging>pom</packaging>
   <build>
     <plugins>
