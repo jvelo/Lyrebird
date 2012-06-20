@@ -14,7 +14,7 @@
   <description>An XWiki skin based on Twitter's bootstrap.css</description>
   <scm>
     <connection>scm:git:git://github.com/jvelo/Lyrebird.git</connection>
-    <developerConnection>scm:git:git@github.com:jvelo/Lyrebrid.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:jvelo/Lyrebird.git</developerConnection>
     <url>https://github.com/jvelo/Lyrebird</url>
   </scm>
   <distributionManagement>
