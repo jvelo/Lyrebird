@@ -362,12 +362,21 @@ ul.xlist li.xitem div.xitemcontainer ul.xlist {
 
 /* Fix panels */
 
+.xwikipanelcontents {
+    padding:10px 15px;
+}
+
 .xwikipanelcontents p span.panelitem {
   display:block;
 }
 
 .xwikipanelcontents p span.pitemseparator {
   display:none;
+}
+
+.panel ul {
+    list-style-type:none;
+    margin:0;
 }
 
 /* Fix content menu. */
